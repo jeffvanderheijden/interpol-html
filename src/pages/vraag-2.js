@@ -7,7 +7,7 @@ import Button from './../components/Button/Button';
 import Editor from './../components/Editor/Editor';
 import Assignment from './../components/Explanation/Assignment';
 
-const IndexPage = () => {
+const Vraag2 = () => {
   const frameRef = useRef(null);
   const stepOneRef = useRef(null);
   const stepTwoRef = useRef(null);
@@ -18,12 +18,12 @@ const IndexPage = () => {
   const [openedEditor, setOpenedEditor] = useState('html');
   const [srcDoc, setSrcDoc] = useState(` `);
   const [html, setHtml] = useState('<!-- HTML -->');
-  // const [css, setCss] = useState('/* CSS */');
-  // const [js, setJs] = useState('// JavaScript');
+  const [css, setCss] = useState('/* CSS */');
+  const [js, setJs] = useState('// JavaScript');
 
-  // const onTabClick = (editorName) => {
-  //   setOpenedEditor(editorName);
-  // };
+  const onTabClick = (editorName) => {
+    setOpenedEditor(editorName);
+  };
 
   const validate = () => {
     const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
@@ -58,8 +58,8 @@ const IndexPage = () => {
               <link rel="preconnect" href="https://fonts.googleapis.com">
               <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
               <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-              ${ /* <style>${css}</style> */ "" }
-              ${ /* <script>${js}</script> */ "" }
+              <style>${css}</style>
+              <script>${js}</script>
               <style>
                 * {
                   font-family: "Roboto", sans-serif;
@@ -72,7 +72,7 @@ const IndexPage = () => {
       )
     }, 250);
     return () => clearTimeout(timeOut)
-  }, [html]);
+  }, [html, css, js]);
 
   return (    
     <div id="App">    
@@ -118,7 +118,7 @@ const IndexPage = () => {
 
       <div id="editor">
         {/* Switch through the different editors */}
-        {/* <ul id="editorSwitch">
+        <ul id="editorSwitch">
           <li>
             <Button title="index.html" onClick={() => { onTabClick('html') }} />
           </li>
@@ -128,10 +128,10 @@ const IndexPage = () => {
           <li>
             <Button title="scripts.js" onClick={() => { onTabClick('js') }} />
           </li>
-        </ul> */}
+        </ul>
         {/* Editors for HTML / CSS / JS */}
         <div id="editorContainer">
-          {/* { openedEditor === 'html' ? ( */}
+          { openedEditor === 'html' ? (
             <Editor
               language="xml"
               readOnly={false}
@@ -140,7 +140,7 @@ const IndexPage = () => {
               validate={validate}
               viewSolution={viewSolution}
             />
-          {/* ) : openedEditor === 'css' ? (
+          ) : openedEditor === 'css' ? (
             <Editor
               language="css"
               readOnly={false}
@@ -158,7 +158,7 @@ const IndexPage = () => {
               validate={validate}
               viewSolution={viewSolution}
             />
-          )} */}
+          )}
         </div>
       </div>
 
@@ -184,6 +184,6 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default Vraag2
 
-export const Head = () => <title>Home Page</title>
+export const Head = () => <title>Vraag 2</title>

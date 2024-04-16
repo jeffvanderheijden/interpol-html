@@ -4,7 +4,7 @@ const Explanation = ({
     subtitle,
     title,
     time,
-    children
+    children,
 }) => {
     return (
         <div id="explanation">

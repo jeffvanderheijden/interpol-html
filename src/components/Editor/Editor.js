@@ -10,8 +10,10 @@ import { Controlled as ControlledEditorComponent } from 'react-codemirror2';
 const Editor = ({ 
     language, 
     value, 
+    type,
     setEditorState,
     validate,
+    readOnly,
     viewSolution
 }) => {
     const handleChange = (editor, data, value) => {
@@ -19,23 +21,26 @@ const Editor = ({
     }
 
     return (
-        <div className="editorInner">
+        <div className={type && type === 'assignment' ? "" : "editorInner"}>
             <ControlledEditorComponent
                 onBeforeChange={handleChange}
                 value={value}
                 className="codeMirrorWrapper"
                 options={{
-                    lineWrapping: true,
+                    readOnly: readOnly,
+                    lineWrapping: false,
                     lint: true,
                     mode: language,
-                    lineNumbers: true,
+                    lineNumbers: type !== 'assignment' ? true : false,
                     theme: "dracula",
                 }}
             />
-            <div id="editorActions">
-                <button id="validate" onClick={() => { validate() }}>Run</button>
-                <button id="solution" onClick={() => { viewSolution() }}>View solution</button>
-            </div>
+            {type !== 'assignment' && (
+                <div id="editorActions">
+                    <button id="validate" onClick={() => { validate() }}>Uitvoeren</button>
+                    <button id="solution" onClick={() => { viewSolution() }}>Bekijk oplossing</button>
+                </div>
+            )}
         </div>
     )
 }

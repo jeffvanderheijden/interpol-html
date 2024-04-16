@@ -24,6 +24,8 @@ body {
 
 #App > * {
     flex: 1 1 0;
+    flex-basis: 100%;
+    max-width: calc(100% / 3);
 }
 
 #instructions #explanation {
@@ -54,6 +56,8 @@ body {
 #explanation ul {
     list-style-type: disc;
     padding-left: 10px;
+    font-size: 14px;
+    line-height: 22px;
 }
 #explanation ul li {
     margin-bottom: 10px;
@@ -62,6 +66,37 @@ body {
 #explanation p {
     font-size: 14px;
     line-height: 22px;
+}
+
+#assignment .topBar {
+    height: 30px;
+    margin: 20px 0px 20px -20px;
+    line-height: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 0 20px;
+    width: calc(100% + 40px);
+    background-color: #eff2ff;
+}
+
+#assignment p,
+#assignment code,
+#assignment input[type="checkbox"] {
+    display: inline-block;
+}
+#assignment input[type="checkbox"] {
+    margin-top: 6px;
+    margin-right: 6px;
+}
+#assignment .step {
+    display: flex;
+    align-items: flex-start;
+    margin: 6px 0px;
+}
+
+code {
+    padding: 2px 4px;
+    background-color: #efefef;
 }
 
 .topBar {
@@ -114,6 +149,24 @@ body {
 .codeMirrorWrapper {
     height: calc(100vh - 83.6px) !important;
 }
+.CodeMirror-scroll {
+    padding: 10px;
+    height: calc(100% - 20px) !important;
+}
+
+#assignment #editorContainer, 
+#assignment .editorInner, 
+#assignment .CodeMirror, 
+#assignment .codeMirrorWrapper {
+    height: auto !important;
+}
+
+#assignment input[type="checkbox"] {
+    display: inline-block;
+}
+#liveView {
+    position: relative;
+}
 
 iframe {    
     height: 100vh;
@@ -140,6 +193,7 @@ iframe {
     background-color: #FFD300;
     font-size: 12px;
 }
+
 #solution {
     font-size: 12px;
     padding: 10px 20px;
@@ -149,4 +203,31 @@ iframe {
     float: right;
     border: none;
     background-color: transparent;
+}
+
+#nextBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    background-color: #282a36;
+    color: #FFF;
+    font-size: 12px;
+    width: 100%;
+}
+#nextBar a {
+    float: right;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+    font-weight: 700;
+    background-color: #6ffc49;
+    font-size: 12px;
 }
