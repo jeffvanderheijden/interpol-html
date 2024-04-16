@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    font-family: "Roboto", sans-serif !important;
+}
+
+#___gatsby {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#App {
+    display: flex;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+#App > * {
+    flex: 1 1 0;
+}
+
+#instructions #explanation {
+    max-height: calc(100vh - 30px);
+    padding: 20px;
+    overflow: scroll;
+}
+
+#explanation h3 { 
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    color: #d4d4d4;
+}
+
+#explanation h2 { 
+    font-size: 18px;
+    font-weight: bold;
+    margin: 12px 0px;
+}
+
+#explanation span {
+    font-size: 10px;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+#explanation ul {
+    list-style-type: disc;
+    padding-left: 10px;
+}
+#explanation ul li {
+    margin-bottom: 10px;
+}
+
+#explanation p {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.topBar {
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 0 20px;
+    background-color: #eff2ff;
+}
+
+#editorSwitch {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #15141f;
+}
+
+#editorSwitch button {
+    height: 30px;
+    margin-right: 2px;
+    background-color: #282a36;
+    border: none;
+    padding: 0px 15px;
+    font-size: 10px;
+    color: #6272a4;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+#editorSwitch button:hover {
+    background-color: #1d1f2a;
+}
+
+#editorContainer {
+    display: flex;
+}
+
+.editorInner {
+    width: 100%;
+    position: relative;
+}
+
+#editorContainer,
+.editorInner,
+.CodeMirror,
+.codeMirrorWrapper {
+    height: calc(100vh - 83.6px) !important;
+}
+
+iframe {    
+    height: 100vh;
+    border: none;
+}
+
+#editorActions {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    padding: 10px;
+    left: 0;
+    right: 0;
+}
+
+#validate {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+    font-weight: 700;
+    background-color: #FFD300;
+    font-size: 12px;
+}
+#solution {
+    font-size: 12px;
+    padding: 10px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #FFF;
+    float: right;
+    border: none;
+    background-color: transparent;
+}
