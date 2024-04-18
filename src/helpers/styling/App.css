@@ -22,7 +22,7 @@ body {
     overflow: hidden;
 }
 
-#App > * {
+#App>* {
     flex: 1 1 0;
     flex-basis: 100%;
     max-width: calc(100% / 3);
@@ -34,14 +34,20 @@ body {
     overflow: scroll;
 }
 
-#explanation h3 { 
+#instructions #explanation img {
+    width: 100%;
+    height: auto;
+    margin: 15px 0px;
+}
+
+#explanation h3 {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
     color: #d4d4d4;
 }
 
-#explanation h2 { 
+#explanation h2 {
     font-size: 18px;
     font-weight: bold;
     margin: 12px 0px;
@@ -59,6 +65,7 @@ body {
     font-size: 14px;
     line-height: 22px;
 }
+
 #explanation ul li {
     margin-bottom: 10px;
 }
@@ -84,10 +91,12 @@ body {
 #assignment input[type="checkbox"] {
     display: inline-block;
 }
+
 #assignment input[type="checkbox"] {
     margin-top: 6px;
     margin-right: 6px;
 }
+
 #assignment .step {
     display: flex;
     align-items: flex-start;
@@ -95,7 +104,8 @@ body {
 }
 
 code {
-    padding: 2px 4px;
+    border-radius: 3px;
+    padding: 2px 6px;
     background-color: #efefef;
 }
 
@@ -109,13 +119,13 @@ code {
 }
 
 #editorSwitch {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  background-color: #15141f;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #15141f;
 }
 
 #editorSwitch button {
@@ -149,14 +159,15 @@ code {
 .codeMirrorWrapper {
     height: calc(100vh - 83.6px) !important;
 }
+
 .CodeMirror-scroll {
     padding: 10px;
     height: calc(100% - 20px) !important;
 }
 
-#assignment #editorContainer, 
-#assignment .editorInner, 
-#assignment .CodeMirror, 
+#assignment #editorContainer,
+#assignment .editorInner,
+#assignment .CodeMirror,
 #assignment .codeMirrorWrapper {
     height: auto !important;
 }
@@ -164,11 +175,12 @@ code {
 #assignment input[type="checkbox"] {
     display: inline-block;
 }
+
 #liveView {
     position: relative;
 }
 
-iframe {    
+iframe {
     height: 100vh;
     border: none;
 }
@@ -219,10 +231,11 @@ iframe {
     font-size: 12px;
     width: 100%;
 }
-#nextBar a {
-    float: right;
+
+#nextBar a,
+#nextBar button {
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 11px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -230,4 +243,64 @@ iframe {
     font-weight: 700;
     background-color: #6ffc49;
     font-size: 12px;
+}
+
+#nextBar button {
+    padding: 10px 18px;
+    color: #999;
+    cursor: not-allowed;
+    background-color: #d4d4d4;
+}
+
+#successScreen,
+#errorScreen {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+svg {
+    width: 100px;
+    display: block;
+    margin: 40px auto 0;
+}
+.path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+}
+.path.circle {
+    -webkit-animation: dash .9s ease-in-out;
+    animation: dash .9s ease-in-out;
+}
+.path.line {
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash .9s .35s ease-in-out forwards;
+    animation: dash .9s .35s ease-in-out forwards;
+}
+.path.check {
+    stroke-dashoffset: -100;
+    -webkit-animation: dash-check .9s .35s ease-in-out forwards;
+    animation: dash-check .9s .35s ease-in-out forwards;
+}
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes dash-check {
+    0% {
+        stroke-dashoffset: -100;
+    }
+    100% {
+        stroke-dashoffset: 900;
+    }
 }

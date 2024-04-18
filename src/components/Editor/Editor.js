@@ -38,7 +38,7 @@ const Editor = ({
             {type !== 'assignment' && (
                 <div id="editorActions">
                     <button id="validate" onClick={() => { validate() }}>Uitvoeren</button>
-                    <button id="solution" onClick={() => { viewSolution() }}>Bekijk oplossing</button>
+                    {/* <button id="solution" onClick={() => { viewSolution() }}>Bekijk oplossing</button> */}
                 </div>
             )}
         </div>
