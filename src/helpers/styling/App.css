@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+i {
+    font-style: italic;
+}
+
 body {
     height: 100vh;
     margin: 0;
@@ -26,6 +30,16 @@ body {
     flex: 1 1 0;
     flex-basis: 100%;
     max-width: calc(100% / 3);
+}
+
+ol {
+    list-style-type: decimal;
+    font-size: 14px;
+    line-height: 22px;
+}
+ol li {
+    margin-left: 16px;
+    margin-bottom: 10px;
 }
 
 #instructions #explanation {
@@ -53,7 +67,7 @@ body {
     margin: 12px 0px;
 }
 
-#explanation span {
+#explanation h4 {
     font-size: 10px;
     margin-bottom: 12px;
     display: inline-block;
@@ -168,8 +182,18 @@ code {
 #assignment #editorContainer,
 #assignment .editorInner,
 #assignment .CodeMirror,
-#assignment .codeMirrorWrapper {
+#assignment .codeMirrorWrapper,
+#explanation #editorContainer,
+#explanation .editorInner,
+#explanation .CodeMirror,
+#explanation .codeMirrorWrapper {
     height: auto !important;
+    font-size: 10px;    
+}
+
+#assignment .CodeMirror-scroll,
+#explanation .CodeMirror-scroll {
+    padding-top: 0px !important;
 }
 
 #assignment input[type="checkbox"] {
@@ -263,6 +287,10 @@ iframe {
     justify-content: center;
     z-index: 99999;
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+#virtualDom {
+    display: none;
 }
 
 svg {

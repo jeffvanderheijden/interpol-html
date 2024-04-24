@@ -140,7 +140,7 @@ const Layout = ({
           <iframe
             srcDoc={srcDoc}
             title="output"
-            sandbox="allow-scripts allow-modals allow-same-origin"
+            sandbox="allow-scripts allow-modals allow-popups allow-same-origin"
             width="100%"
             height="100%"
             ref={frameRef}

@@ -1,10 +1,8 @@
 import React, { useState, useRef } from "react";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
-import img1 from "./../helpers/images/html-explained.png";
 
-const Vraag2Page = () => {
-    const virtualDomRef = useRef(null);
+const Vraag5Page = () => {
     const frameRef = useRef(null);
     const stepOneRef = useRef(null);
     const stepTwoRef = useRef(null);
@@ -16,25 +14,18 @@ const Vraag2Page = () => {
     const [stepsComplete, setStepsComplete] = useState(false);
     const [successScreen, setSuccessScreen] = useState(false);
 
-    const nextPage = "/vraag-3"; 
-    const allowedEditors = ['html', 'css'];
-    const cssState = `/* CSS */
-.copied {
-    color: blue;
-    font-size: 12px;
-}`;
+    const nextPage = "/opdracht-1"; 
+    const allowedEditors = ['html'];
+    const cssState = `/* CSS */`;
     const jsState = `// JavaScript`;
-    const htmlState = `<!-- HTML -->
-<body>
-</body>`;
+    const htmlState = `<!-- HTML -->`;
 
     const validateHTML = () => {
         const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
-        virtualDomRef.current.innerHTML = '';
-        virtualDomRef.current.insertAdjacentHTML('beforeend', codeToCheck);
-        const checkOne = codeToCheck.includes('<h1>') && codeToCheck.includes('</h1>');
-        const checkTwo = [...virtualDomRef.current.children].map(child => child.tagName).includes('P');
-        const checkThree = codeToCheck.includes('class="copied"');
+        const checkOne = codeToCheck.includes('<a');
+        const checkTwo = codeToCheck.includes('<a href="https://www.glr.nl"');
+        const checkThree = codeToCheck.includes('target="_blank"');
+
         // Here we validate the output of the iframe
         checkOne ? setStepOne(true) : setStepOne(false);
         checkTwo ? setStepTwo(true) : setStepTwo(false);
@@ -59,16 +50,21 @@ const Vraag2Page = () => {
 
     const explanation = () => (
         <>
-            <p>HTML is opgebouwd uit elementen. Deze elementen structureren de webpagina en definiëren de inhoud ervan. Laten we eens kijken hoe ze zijn geschreven.</p><br />
-            <p>Het diagram hieronder toont een HTML-paragraafelement. Zoals we kunnen zien, bestaat het paragraafelement uit:</p>
-            <img src={img1} alt="HTML explained" />
+            <p>Anker-elementen, vaak aangeduid als hyperlinks, worden gebruikt om klikbare links naar andere webpagina's, documenten of bronnen in een HTML-document te maken. Ze werken bijna hetzelfde als afbeeldingen.</p><br />
+            <p>Het <code>&lt;a&gt;</code>-element wordt gebruikt om ankers te maken. Hier is een voorbeeld van hoe je het gebruikt:</p><br />
+            <Editor
+                type={'assignment'}
+                language="xml"
+                readOnly={true}
+                lineWrapping={true}
+                value={`<a href="https://www.example.com" target="_self">Klik hier om naar voorbeeld.com te gaan</a>`}
+            /><br />
             <ul>
-                <li>Een openingstag <code>&lt;p&gt;</code></li>
-                <li>De inhoud <code>“Hello World!”</code> tekst</li>
-                <li>Een afsluitende tag <code>&lt;/p&gt;</code></li>
-                <li>Een tag en de inhoud daartussen wordt een HTML-element genoemd. Er zijn veel tags die we kunnen gebruiken om tekst en andere soorten inhoud, zoals afbeeldingen, te ordenen en weer te geven.</li>
+                <li>href: Dit attribuut geeft de URL van de doelpagina aan waarnaar de link leidt.</li>
+                <li>target: Het target attribuut biedt controle over hoe gekoppelde pagina's worden geopend, waardoor ontwikkelaars de gebruikerservaring kunnen verbeteren door te bepalen of de gekoppelde inhoud in hetzelfde venster of in een nieuw venster/tabblad wordt geopend.</li>
+                <li>Tekstinvoer tussen de opening en sluiting van het <code>&lt;a&gt;</code>-element wordt de zichtbare linktekst op de webpagina.</li>
             </ul>
-            <p>Een HTML element kan ook één of meerdere attributen hebben. Deze attributen hebben dan elk weer een waarde. Maar hierover later meer.</p>
+            <p>Het <code>&lt;a&gt;</code>-element is essentieel voor het maken van klikbare links in HTML-documenten, waardoor gebruikers gemakkelijk kunnen navigeren tussen verschillende webpagina's en bronnen op het internet.</p>
         </> 
     )
 
@@ -76,23 +72,17 @@ const Vraag2Page = () => {
         <>
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepOneRef} checked={stepOne} />
-                <p>Voeg een <code>&lt;h1&gt;</code> element toe binnen het <code>&lt;body&gt;</code> element. Zet hierin jouw naam.</p>
+                <p>Creëer een <code>&lt;a&gt;</code>-element</p>
             </div>
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepTwoRef} checked={stepTwo} />
-                <p>Voeg nu onder het <code>&lt;h1&gt;</code> element de volgende code toe:</p>
+                <p>Voeg daarin de volgende link in het href attribuut: https://www.glr.nl</p>
             </div>
-            <Editor
-                type={'assignment'}
-                language="xml"
-                readOnly={true}
-                value={'<p>"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."</p>'}
-            />
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepThreeRef} checked={stepThree} />
-                <p>Voeg nu een attribute "class" toe aan het <code>&lt;p&gt;</code> element met de waarde: "copied"</p>
+                <p>Voeg tevens hetvolgende toe in een target attribuut: "_blank"</p>
             </div>
-            <p>Je ziet dat door het toevoegen van een class attribute het uiterlijk van de tekst veranderd. Dit komt door CSS. Hierover later meer.</p>
+            <p>Klik nu op de link om te zien wat er gebeurt.</p>
         </>
     )
 
@@ -108,8 +98,8 @@ const Vraag2Page = () => {
                 validateJS={validateJS}
                 explanationTopBar={"Leren"}
                 explanationSubtitle={"Introductie HTML"}
-                explanationTitle={"HTML Anatomie"}
-                explanationTime={"5 min"}
+                explanationTitle={"(Hyper)links in HTML"}
+                explanationTime={"4 min"}
                 explanation={explanation}
                 assignment={assignment}
                 allowedEditors={allowedEditors}
@@ -117,11 +107,10 @@ const Vraag2Page = () => {
                 successScreen={successScreen}
                 nextPage={nextPage}
             />
-            <div ref={virtualDomRef} id="virtualDom" />
         </>
   )
 }
 
-export default Vraag2Page
+export default Vraag5Page
 
-export const Head = () => <title>Vraag 2</title>
+export const Head = () => <title>Vraag 5</title>

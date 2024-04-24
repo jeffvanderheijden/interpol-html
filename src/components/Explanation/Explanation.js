@@ -10,7 +10,7 @@ const Explanation = ({
         <div id="explanation">
             <h3>{subtitle}</h3>
             <h2>{title}</h2>
-            <span>{time}</span>
+            <h4>{time}</h4>
             { children }
         </div>
     )

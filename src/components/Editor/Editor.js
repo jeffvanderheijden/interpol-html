@@ -13,8 +13,7 @@ const Editor = ({
     type,
     setEditorState,
     validate,
-    readOnly,
-    viewSolution
+    readOnly
 }) => {
     const handleChange = (editor, data, value) => {
         setEditorState(value);
@@ -38,7 +37,6 @@ const Editor = ({
             {type !== 'assignment' && (
                 <div id="editorActions">
                     <button id="validate" onClick={() => { validate() }}>Uitvoeren</button>
-                    {/* <button id="solution" onClick={() => { viewSolution() }}>Bekijk oplossing</button> */}
                 </div>
             )}
         </div>
