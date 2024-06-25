@@ -6,7 +6,6 @@ import 'codemirror/mode/css/css';
 import 'codemirror/theme/dracula.css';
 import { Controlled as ControlledEditorComponent } from 'react-codemirror2';
 
-
 const Editor = ({ 
     language, 
     value, 
@@ -31,7 +30,7 @@ const Editor = ({
                     lint: true,
                     mode: language,
                     lineNumbers: type !== 'assignment' ? true : false,
-                    theme: "dracula",
+                    theme: "dracula"
                 }}
             />
             {type !== 'assignment' && (

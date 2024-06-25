@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Layout from "../helpers/Layout";
+import LocalStorage from "../helpers/LocalStorage";
 import opdracht1Logo from "./../helpers/images/opdracht1-logo.png";
 import opdracht1 from "./../helpers/images/opdracht1.png";
 
@@ -12,6 +13,7 @@ const Opdracht1Page = () => {
     const stepFourRef = useRef(null);
     const stepFiveRef = useRef(null);
     const stepSixRef = useRef(null);
+    const stepSevenRef = useRef(null);
 
     const [stepOne, setStepOne] = useState(false);
     const [stepTwo, setStepTwo] = useState(false);
@@ -19,6 +21,7 @@ const Opdracht1Page = () => {
     const [stepFour, setStepFour] = useState(false);
     const [stepFive, setStepFive] = useState(false);
     const [stepSix, setStepSix] = useState(false);
+    const [stepSeven, setStepSeven] = useState(false);
     const [stepsComplete, setStepsComplete] = useState(false);
     const [successScreen, setSuccessScreen] = useState(false);
 
@@ -133,15 +136,15 @@ figcaption>span{
         const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
         virtualDomRef.current.innerHTML = '';
         virtualDomRef.current.insertAdjacentHTML('beforeend', codeToCheck);
-        const checkOne = virtualDomRef.current.getElementsByTagName('h2')[0].innerHTML === 'Grafisch Lyceum Rotterdam';
+        const checkOne = virtualDomRef.current.getElementsByTagName('h2')[0].innerHTML.includes('Grafisch Lyceum Rotterdam');
         const checkTwo = virtualDomRef.current.getElementsByTagName('p')[1].innerHTML.trim().substring(0, 26) === "Studenten van de opleiding";
-        const checkThree = virtualDomRef.current.getElementsByTagName('img')[0].src.includes('make-a-thon.jpg');
-        const checkFourOne = virtualDomRef.current.getElementsByTagName('strong')[0].innerHTML.includes('RTV Rijnmond op bezoek');
-        const checkFourTwo = virtualDomRef.current.getElementsByTagName('span')[0].innerHTML.includes('<a href="https://bit.ly/2Gf7awb">');
-        const checkFourThree = virtualDomRef.current.getElementsByTagName('span')[0].innerHTML.includes('target="_blank"');
-        const checkFour = checkFourOne && checkFourTwo && checkFourThree;
-        const checkFive = virtualDomRef.current.getElementsByTagName('h2')[0].innerHTML.includes('<a href="https://www.glr.nl">');
-        const checkSix = [...virtualDomRef.current.getElementsByTagName('figure')[0].children].map(child => child.tagName).includes('A');
+        const checkThree = virtualDomRef.current.getElementsByTagName('img')[1].src.includes('https://upload.wikimedia.org/wikipedia/commons/2/2f/Glr.jpg');
+        const checkFour = virtualDomRef.current.getElementsByTagName('strong')[0].innerHTML.includes('RTV Rijnmond op bezoek');
+        const checkFiveOne = virtualDomRef.current.getElementsByTagName('span')[0].innerHTML.includes('href="https://bit.ly/2Gf7awb"');
+        const checkFiveTwo = virtualDomRef.current.getElementsByTagName('span')[0].innerHTML.includes('target="_blank"');
+        const checkFive = checkFiveOne && checkFiveTwo;
+        const checkSix = virtualDomRef.current.getElementsByTagName('h2')[0].innerHTML.includes('<a href="https://www.glr.nl">');
+        const checkSeven = [...virtualDomRef.current.getElementsByTagName('figure')[0].children].map(child => child.tagName).includes('A');
 
         // Here we validate the output of the iframe
         checkOne ? setStepOne(true) : setStepOne(false);
@@ -150,9 +153,12 @@ figcaption>span{
         checkFour ? setStepFour(true) : setStepFour(false);
         checkFive ? setStepFive(true) : setStepFive(false);
         checkSix ? setStepSix(true) : setStepSix(false);
-        if (checkOne && checkTwo && checkThree && checkFour && checkFive && checkSix) {
+        checkSeven ? setStepSeven(true) : setStepSeven(false);
+
+        if (checkOne && checkTwo && checkThree && checkFour && checkFive && checkSix && checkSeven) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);
@@ -187,18 +193,22 @@ figcaption>span{
             </div>
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepThreeRef} checked={stepThree} />
-                <p>De afbeelding moet vervangen worden door de aangeleverde afbeelding: make-a-thon.jpg.</p>
+                <p>De afbeelding moet vervangen worden door de aangeleverde afbeelding: <code>https://upload.wikimedia.org/wikipedia/commons/2/2f/Glr.jpg</code></p>
             </div>
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepFourRef} checked={stepFour} />
-                <p>Vervang de tekst "Parkeergarage.." met: <code>RTV Rijnmond op bezoek. Lees hier meer: https://bit.ly/2Gf7awb</code> Deze link moet openen in een nieuw venster.</p>
+                <p>Vervang de tekst "Parkeergarage" in het strong element met: <code>RTV Rijnmond op bezoek.</code></p>
             </div>
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepFiveRef} checked={stepFive} />
-                <p>Zorg dat de titel bovenaan het bericht (de heading 2) ook een linkje wordt. Dit linkje moet naar <code>https://www.glr.nl</code> gaan. Deze link moet openen in hetzelfde venster als de Facebook post.</p>
+                <p>Vervang de tekst daaronder (in het span element)met <code>Lees hier meer: https://bit.ly/2Gf7awb</code> Deze link moet openen in een nieuw venster.</p>
             </div>
             <div className="step">
                 <input type="checkbox" disabled={true} ref={stepSixRef} checked={stepSix} />
+                <p>Zorg dat de titel bovenaan het bericht (het H2 element) ook een linkje wordt. Dit linkje moet naar <code>https://www.glr.nl</code> gaan. Deze link moet openen in hetzelfde venster als de Facebook post.</p>
+            </div>
+            <div className="step">
+                <input type="checkbox" disabled={true} ref={stepSevenRef} checked={stepSeven} />
                 <p>Zorg ervoor dat de afbeelding ook een link is. Deze moet ook koppelen met het bericht van RTV Rijnmond: <code>https://bit.ly/2Gf7awb</code></p>
             </div>
         </>

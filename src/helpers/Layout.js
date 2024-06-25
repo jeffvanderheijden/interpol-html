@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "gatsby"
+import { Link } from "gatsby";
 import "./../helpers/styling/reset.css";
 import "./../helpers/styling/App.css";
 import Explanation from './../components/Explanation/Explanation';
 import Button from './../components/Button/Button';
 import Editor from './../components/Editor/Editor';
+import NoSSR from "./../components/NoSSR/NoSSR";  
 import Assignment from './../components/Explanation/Assignment';
 import SuccessScreen from "../components/SuccessScreen/SuccessScreen";
 // import ErrorScreen from "../components/ErrorScreen/ErrorScreen";
@@ -26,7 +27,8 @@ const Layout = ({
     allowedEditors,
     stepsComplete,
     successScreen,
-    nextPage
+    nextPage,
+    hacked
 }) => {
   const [openedEditor, setOpenedEditor] = useState('html');
   const [srcDoc, setSrcDoc] = useState(` `);
@@ -69,8 +71,8 @@ const Layout = ({
   }, [html, css, js]);
 
   return (  
-    <>
-      <div id="App">    
+    <NoSSR>
+      <div id="App" className={hacked ? "hacked" : ""}>    
         <div id="instructions">
           <div className="topBar">{explanationTopBar}</div>
           <Explanation 
@@ -159,7 +161,7 @@ const Layout = ({
       {successScreen && (
         <SuccessScreen />
       )}
-    </>
+    </NoSSR>
   )
 }
 

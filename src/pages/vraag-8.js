@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
+import LocalStorage from "../helpers/LocalStorage";
 
 const Vraag8Page = () => {
     const frameRef = useRef(null);
@@ -12,7 +13,7 @@ const Vraag8Page = () => {
     const [stepsComplete, setStepsComplete] = useState(false);
     const [successScreen, setSuccessScreen] = useState(false);
 
-    const nextPage = "/vraag-9"; 
+    const nextPage = "/opdracht-2"; 
     const allowedEditors = ['html', 'css'];
     const cssState = `/* CSS */
 div {
@@ -42,6 +43,7 @@ div {
         if (checkOne && checkTwo) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);

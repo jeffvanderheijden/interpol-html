@@ -11,6 +11,7 @@ i {
 body {
     height: 100vh;
     margin: 0;
+    background-color: #000;
     font-family: "Roboto", sans-serif !important;
 }
 
@@ -42,16 +43,27 @@ ol li {
     margin-bottom: 10px;
 }
 
+#instructions {
+    background-color: #FFF;
+}
+
 #instructions #explanation {
     max-height: calc(100vh - 30px);
     padding: 20px;
     overflow: scroll;
+    min-height: 100%;    
 }
 
 #instructions #explanation img {
     width: 100%;
     height: auto;
     margin: 15px 0px;
+}
+
+#instructions #explanation iframe { 
+    width: 100%;
+    height: 240px;
+    border-radius: 10px;
 }
 
 #explanation h3 {
@@ -87,6 +99,18 @@ ol li {
 #explanation p {
     font-size: 14px;
     line-height: 22px;
+}
+#instructions #explanation .hackerWrapper {
+    margin: 0 auto;
+    width: 120px;
+}
+#instructions #explanation img.hacker {
+    width: 120px;
+    height: 120px;
+    border-radius: 120px;
+}
+#assignment {
+    margin-bottom: 30px;
 }
 
 #assignment .topBar {
@@ -202,11 +226,12 @@ code {
 
 #liveView {
     position: relative;
+    background-color: #FFF;
 }
 
 iframe {
     height: 100vh;
-    border: none;
+    border: none;    
 }
 
 #editorActions {
@@ -375,4 +400,45 @@ svg {
     100% {
         stroke-dashoffset: 900;
     }
+}
+
+/* Hacked version of the app */
+@font-face {
+    font-family: 'hackbot';
+    src: url('./../fonts/hackbotfreetrial-webfont.woff2') format('woff2'),
+         url('./../fonts/hackbotfreetrial-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#App.hacked {
+    font-family: 'hackbot';
+}
+
+#App.hacked #instructions,
+#App.hacked #liveView {
+    background-color: #15141f;
+    color: #8eed4f;
+}
+
+#App.hacked .topBar {
+    background-color: #000 !important;
+    color: #000 !important;
+}
+#App.hacked #assignment .topBar {
+    background-color: #44434a !important;
+    color: #c7c6d2 !important;
+}
+.outputConsole {
+    width: 100vw;
+    background-color: #15141f;
+    color: #8eed4f;
+    max-width: 100% !important;
+    min-height: 100vh;
+    padding: 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    font-family: 'hackbot';
 }

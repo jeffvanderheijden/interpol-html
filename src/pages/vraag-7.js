@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
+import LocalStorage from "../helpers/LocalStorage";
 
 const Vraag7Page = () => {
     const frameRef = useRef(null);
@@ -22,7 +23,7 @@ const Vraag7Page = () => {
     const allowedEditors = ['html', 'css'];
     const cssState = `/* CSS */
 * {
-    color: #FFF;
+    color: transparent;
 }`;
     const jsState = `// JavaScript`;
     const htmlState = `<!-- HTML -->
@@ -31,20 +32,33 @@ const Vraag7Page = () => {
 <p>De hacker is laatst gezien op de 5e verdieping van het GLR. Er wordt vermoed dat een leraar de dader is.</p>`;
 
     const validate = () => {
-        const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
-        const checkOne = codeToCheck.includes('<h1>') ? true : false;
         const CSSToCheck = frameRef.current.contentWindow.document.getElementsByTagName('style')[0].innerHTML;
-        const checkTwoOne = CSSToCheck.includes('h1 {');
-        const checkTwoTwo = CSSToCheck.includes('color:');
-        const checkTwoThree = CSSToCheck.includes('font-size:');
+        const checkOneOne = CSSToCheck.includes('body {') || CSSToCheck.includes('body{');
+        const checkOneTwo = CSSToCheck.includes('background') || CSSToCheck.includes('background-color');
+        const checkOneThree = CSSToCheck.includes('#333333') || CSSToCheck.includes('#333');
+        const checkOne = (checkOneOne && checkOneTwo && checkOneThree);
+        const checkTwoOne = CSSToCheck.includes('h1 {') || CSSToCheck.includes('h1{');
+        const checkTwoTwo = CSSToCheck.includes('color');
+        const checkTwoThree = CSSToCheck.includes('white') || CSSToCheck.includes('#FFFFFF') || CSSToCheck.includes('#FFF') || CSSToCheck.includes('rgb(255,255,255)');
         const checkTwo = (checkTwoOne && checkTwoTwo && checkTwoThree);
+        const checkThreeOne = CSSToCheck.includes('h2 {') || CSSToCheck.includes('h2{');
+        const checkThreeTwo = CSSToCheck.includes('#E6E2DD');
+        const checkThree = (checkThreeOne && checkThreeTwo);
+        const checkFour = CSSToCheck.includes('#33CD4B');
+        const checkFiveOne = CSSToCheck.includes('p {') || CSSToCheck.includes('p{');
+        const checkFiveTwo = CSSToCheck.includes('#D4D4D4');
+        const checkFive = (checkFiveOne && checkFiveTwo);
 
         // Here we validate the output of the iframe
         checkOne ? setStepOne(true) : setStepOne(false);
         checkTwo ? setStepTwo(true) : setStepTwo(false);
-        if (checkOne && checkTwo) {
+        checkThree ? setStepThree(true) : setStepThree(false);
+        checkFour ? setStepFour(true) : setStepFour(false);
+        checkFive ? setStepFive(true) : setStepFive(false);
+        if (checkOne && checkTwo && checkThree && checkFour && checkFive) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);
@@ -103,7 +117,7 @@ p {
 p {
     color: rgb(255,255,255);
 }`} /><br />
-            <p>Dit betekent in alle drie de gevallen dat de keur wit moet zijn. Je zult ze alledrie tegen komen tijdens je werk als developer.</p><br />
+            <p>Dit betekent in alle drie de gevallen dat de kleur wit moet zijn. Je zult ze alledrie tegen komen tijdens je werk als developer.</p><br />
         </> 
     )
 

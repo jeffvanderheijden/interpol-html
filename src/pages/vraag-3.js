@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { navigate } from "gatsby";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
+import LocalStorage from "../helpers/LocalStorage";
 
 const Vraag3Page = () => {
     const frameRef = useRef(null);
@@ -21,6 +23,17 @@ const Vraag3Page = () => {
     const jsState = `// JavaScript`;
     const htmlState = `<!-- HTML -->`;
 
+    useEffect(() => {
+        const currentPage = LocalStorage.get('currentPage');
+        if (!currentPage || currentPage !== '/vraag-3') {
+            if (currentPage) {
+                navigate(currentPage);
+            } else {
+                navigate('/');
+            }
+        }
+    }, []);
+
     const validateHTML = () => {
         const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
         virtualDomRef.current.innerHTML = '';
@@ -39,6 +52,7 @@ const Vraag3Page = () => {
         if (checkOne && checkTwo && checkThree) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);

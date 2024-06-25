@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
+import LocalStorage from "../helpers/LocalStorage";
 
 const Vraag5Page = () => {
     const frameRef = useRef(null);
@@ -33,6 +34,7 @@ const Vraag5Page = () => {
         if (checkOne && checkTwo && checkThree) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);

@@ -13,5 +13,8 @@ module.exports = {
       "path": "./src/images/"
     },
     __key: "images"
-  }]
+  }],
+  flags: {
+    DEV_SSR: true,
+  },
 };

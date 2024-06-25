@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { navigate } from "gatsby";
 import Layout from "../helpers/Layout";
 import html1 from "./../helpers/images/html1.png";
+import LocalStorage from "../helpers/LocalStorage";
 
 const IndexPage = () => {
     const frameRef = useRef(null);
@@ -17,6 +19,13 @@ const IndexPage = () => {
     const htmlState = `<!-- HTML -->
 <h1>Jouw naam</h1>`;
 
+    useEffect(() => {
+        const currentPage = LocalStorage.get('currentPage');
+        if (currentPage) {
+            navigate(currentPage);
+        }
+    }, []);
+
     const validateHTML = () => {
         const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
         // Here we validate the output of the iframe
@@ -24,6 +33,7 @@ const IndexPage = () => {
             setStepOne(true);
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);
@@ -43,7 +53,9 @@ const IndexPage = () => {
     const explanation = () => (
         <>
             <p>
-                Welkom in de wereld van code! Iedereen die leert programmeren is waarschijnlijk begonnen met HTML. Waarom? HTML is het skelet van alle webpagina's. Het is vaak de eerste taal die ontwikkelaars, marketeers en ontwerpers leren en vormt de kern van front-end development.
+                Welkom in de wereld van code! Iedereen die leert programmeren is waarschijnlijk begonnen met HTML. Waarom? HTML is het skelet van alle webpagina's. Het is vaak de eerste taal die ontwikkelaars, marketeers en ontwerpers leren en vormt de kern van front-end development. Bekijk de video hieronder voor een introductie in HTML. <i>(De video is wat lang maar er is een hoop te leren!)</i> Daarna gaan we zelf aan de slag!
+                <br /><br />
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/HD13eq_Pmp8?si=gTiXJHqOEdN4NbTo" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <br /><br />
                 Dus wat is HTML precies? HTML biedt structuur aan de inhoud die op een website verschijnt, zoals afbeeldingen, tekst of video's. Klik met de rechtermuisknop op een willekeurige pagina op internet, kies 'Inspecteren' en je ziet HTML in een paneel van uw scherm.
                 <br /><br />
@@ -99,4 +111,4 @@ const IndexPage = () => {
 
 export default IndexPage
 
-export const Head = () => <title>Vraag 1</title>
+export const Head = () => <title>HTML Video</title>

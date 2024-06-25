@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { navigate } from "gatsby";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
 import img1 from "./../helpers/images/html-explained.png";
+import LocalStorage from "./../helpers/LocalStorage";
 
-const Vraag2Page = () => {
+const Vraag2Page = () => {    
     const virtualDomRef = useRef(null);
     const frameRef = useRef(null);
     const stepOneRef = useRef(null);
@@ -28,6 +30,17 @@ const Vraag2Page = () => {
 <body>
 </body>`;
 
+    useEffect(() => {
+        const currentPage = LocalStorage.get('currentPage');
+        if (!currentPage || currentPage !== '/vraag-2') {
+            if (currentPage) {
+                navigate(currentPage);
+            } else {
+                navigate('/');
+            }
+        }
+    }, []);
+
     const validateHTML = () => {
         const codeToCheck = frameRef.current.contentWindow.document.body.innerHTML;
         virtualDomRef.current.innerHTML = '';
@@ -42,6 +55,7 @@ const Vraag2Page = () => {
         if (checkOne && checkTwo && checkThree) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);

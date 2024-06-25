@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Layout from "../helpers/Layout";
 import Editor from '../components/Editor/Editor';
+import LocalStorage from "../helpers/LocalStorage";
 
 const Vraag6Page = () => {
     const frameRef = useRef(null);
@@ -36,6 +37,7 @@ const Vraag6Page = () => {
         if (checkOne && checkTwo) {
             setStepsComplete(true);
             setSuccessScreen(true);
+            LocalStorage.set('currentPage', nextPage);
             setTimeout(() => {
                 setSuccessScreen(false);
             }, 2000);
@@ -47,7 +49,8 @@ const Vraag6Page = () => {
 
     const explanation = () => (
         <>
-            <p>CSS staat voor Cascading Style Sheets. Het is een opmaaktaal die wordt gebruikt om de presentatie en het uiterlijk van een HTML-document te definiëren. Met CSS kunnen ontwikkelaars verschillende stijlen, zoals kleuren, lettertypen, marges, enzovoort, toepassen op HTML-elementen.</p><br />
+            <p>CSS staat voor Cascading Style Sheets. Het is een opmaaktaal die wordt gebruikt om de presentatie en het uiterlijk van een HTML-document te definiëren. Met CSS kunnen ontwikkelaars verschillende stijlen, zoals kleuren, lettertypen, marges, enzovoort, toepassen op HTML-elementen. Bekijk de video hieronder voor een gedetaileerde uitleg over CSS.</p><br /><br />
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/wRNinF7YQqQ?si=1AN2mvrM3puEGUWj" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><br /><br /><br />
             <p>CSS werkt door stijlregels toe te passen op specifieke HTML-elementen. Deze stijlregels worden gedefinieerd in een apart CSS-bestand of binnen het HTML-document zelf, tussen <code>&lt;style&gt;</code> tags in de <code>&lt;head&gt;</code> sectie. Elke stijlregel bestaat uit een selector en een set stijlregels die de gewenste opmaak specificeren:</p><br />
             <Editor
                 type={'assignment'}
