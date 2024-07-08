@@ -64,7 +64,7 @@ const Vraag11Page = () => {
     let speed = 50; 
 
     const typingEffect = () => {
-        if (i < txt.length && instructionRef.current) {
+        if (i < txt.length && instructionRef && instructionRef.current) {
             instructionRef.current.innerHTML += txt.charAt(i);
             i++;
             setTimeout(typingEffect, speed);
