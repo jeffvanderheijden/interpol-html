@@ -73,7 +73,7 @@ const Vraag11Page = () => {
 
     useEffect(() => {
         typingEffect();
-    }, []);
+    }, [instructionRef.current]);
 
     return (
         <>
